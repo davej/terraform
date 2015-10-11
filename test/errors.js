@@ -200,6 +200,22 @@ describe("errors", function(){
     })
   })
 
+  describe(".es6", function(){
+    it("should error with invalid file", function(done){
+      poly.render("es6/invalid.es6", function(error, body){
+        should.not.exist(body)
+        should.exist(error)
+        error.should.have.property('source', "Babel")
+        error.should.have.property('dest', "JavaScript")
+        error.should.have.property('lineno', 4)
+        error.should.have.property('filename')
+        error.should.have.property('message')
+        error.should.have.property('stack')
+        done()
+      })
+    })
+  })
+
   describe(".scss", function(){
     it("should get error if var missing in scss", function(done){
       poly.render("scss/novar.scss", function(error, body){
