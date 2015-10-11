@@ -11,7 +11,7 @@ describe("stylesheets", function(){
     it("should have basic css file", function(done){
       poly.render("main.less", function(error, body){
         should.not.exist(error)
-        body.should.include("background:#ffc0cb")
+        body.should.include("background:pink")
         done()
       })
     })
@@ -31,6 +31,21 @@ describe("stylesheets", function(){
       })
     })
 
+    it("should have link to source map", function(done){
+      poly.render("main.less", function(error, body){
+        body.should.include("sourceMappingURL=main.css.map")
+        done()
+      })
+    })
+
+    it("should output source map", function(done){
+      poly.render("main.less", function(error, body, srcMap){
+        should.exist(srcMap)
+        srcMap.should.include("\"mappings\":\"AAAA")
+        done()
+      })
+    })
+
   })
 
   describe(".styl", function(){
@@ -42,7 +57,7 @@ describe("stylesheets", function(){
       poly.render("main.styl", function(error, body){
         should.not.exist(error)
         should.exist(body)
-        body.should.include("background:#ffc0cb")
+        body.should.include("background:pink")
         body.should.include("font-feature-settings")
         done()
       })
@@ -60,6 +75,21 @@ describe("stylesheets", function(){
       poly.render("main.styl", function(error, body){
         should.not.exist(error)
         body.should.not.include(";}")
+        done()
+      })
+    })
+
+    it("should have link to source map", function(done){
+      poly.render("main.styl", function(error, body){
+        body.should.include("sourceMappingURL=main.css.map")
+        done()
+      })
+    })
+
+    it("should output source map", function(done){
+      poly.render("main.styl", function(error, body, srcMap){
+        should.exist(srcMap)
+        srcMap.should.include("\"mappings\":\"AAAA")
         done()
       })
     })
@@ -96,6 +126,19 @@ describe("stylesheets", function(){
         done()
       })
     })
+    it("should have link to source map", function(done){
+      poly.render("main.scss", function(error, body){
+        body.should.include("sourceMappingURL=main.css.map")
+        done()
+      })
+    })
+    it("should output source map", function(done){
+      poly.render("main.scss", function(error, body, srcMap){
+        should.exist(srcMap)
+        srcMap.should.include("\"mappings\":\"AAAA")
+        done()
+      })
+    })
 
   })
 
@@ -124,6 +167,19 @@ describe("stylesheets", function(){
       poly.render("main.sass", function(error, body){
         should.not.exist(error)
         body.should.not.include(";}")
+        done()
+      })
+    })
+    it("should have link to source map", function(done){
+      poly.render("main.sass", function(error, body){
+        body.should.include("sourceMappingURL=main.css.map")
+        done()
+      })
+    })
+    it("should output source map", function(done){
+      poly.render("main.sass", function(error, body, srcMap){
+        should.exist(srcMap)
+        srcMap.should.include("\"mappings\":\"AAAA")
         done()
       })
     })
