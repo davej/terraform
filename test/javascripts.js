@@ -40,6 +40,21 @@ describe("javascripts", function(){
       })
     })
 
+    it("should have link to source map", function(done){
+      poly.render("main.coffee", function(error, body){
+        body.should.include("sourceMappingURL=main.js.map")
+        done()
+      })
+    })
+
+    it("should output source map", function(done){
+      poly.render("main.coffee", function(error, body, srcMap){
+        should.exist(srcMap)
+        srcMap.should.include("\"mappings\":\"AAGA")
+        done()
+      })
+    })
+
   })
 
 })
